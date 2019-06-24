@@ -1,6 +1,6 @@
 const {VueLoaderPlugin}=require('vue-loader');
 module.exports = {
-    entry: __dirname + '/src/app/index.js',
+    entry: __dirname + '/src/app/main.js',
     output: {
         path: __dirname + '/src/public/js',
         filename: "bundle.js"

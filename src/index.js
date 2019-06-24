@@ -7,8 +7,8 @@ bodyParser = require('body-parser');
 app.set('port', process.env.PORT || 3700);
 
 //Routes
-
 app.use('/api', require('./routes/matricula'));
+
 
 //Middlewares
 app.use(morgan('dev'));
