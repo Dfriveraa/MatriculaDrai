@@ -1,29 +1,15 @@
 MatriculaVue
 
-## Project setup
+## Cargar dependencias
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+## Correr servidor
 ```
-npm run serve
+npm run dev
 ```
-
-### Compiles and minifies for production
+## Escuchar cambios en vuejs y compilarlos
+En otra terminal:
 ```
-npm run build
+npm run webpack
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
