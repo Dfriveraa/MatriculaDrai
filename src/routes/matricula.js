@@ -19,7 +19,7 @@ router.get('/list', (req, res) => {
 router.get('/listView', (req, res) => {
     workbook.xlsx.readFile(pathEcxel+'/model/Matricula.xlsx').then(function () {
 
-            var materias = workbook.getWorksheet(3);
+            var materias = workbook.getWorksheet(2);
             var tabla=materias.getSheetValues();
             console.log(tabla);
             res.json(tabla.slice(1))

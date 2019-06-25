@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const Excel = require('exceljs');
+const moment=require('moment');
 bodyParser = require('body-parser');
 //settings
 app.set('port', process.env.PORT || 3700);
@@ -33,7 +33,8 @@ function matricular(name, curse) {
         if (cupo > 0) {
             hoja1.getRow(index).getCell(3).value = cupo - 1;
             var hoja2 = workbook.getWorksheet(2);
-            hoja2.addRow([name, curse, new Date()]);
+            hoja2.addRow([name, curse, moment().format('MMMM Do YYYY, h:mm:ss a')]);
+            // hoja2.addRow([name, curse, new Date().toISOString().slice(0,10)]);
             if(hoja3.getColumn(1).values.indexOf(name)>0){
                 var indexName = hoja3.getColumn(1).values.indexOf(name);
                 aux=hoja3.getRow(indexName).actualCellCount;

@@ -16,9 +16,7 @@
                 <!--Este botón llama a la función guardar que hemos declarado en la parte script-->
 
 
-
-
-                <h2 class="text-center">Lista de Materias</h2>
+                    <h2 class="text-center">Lista de Materias</h2>
                 <table v-if="this.matricula.estudiante===''" class="table text-center">
                     <thead>
                     <tr>
@@ -46,11 +44,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="curso in alv" :key="curso.id" class="text-center"> <!-- Recorremos nuestro array -->
-                        <td v-text="curso[1]"></td> <!--En la primera columna mostramos el nombre-->
-                        <td v-text="curso[2]"></td> <!--En la segunda mostramos el apellido-->
-                        <td v-text="curso[3]"></td> <!--En la segunda mostramos el apellido-->
-                        <td v-if="curso[3]>1" class="btn btn-success btn-sm" @click="matricular(curso[1])">Add</td>
+                    <tr v-for="(curso,index) in alv" :key="curso.id" class="text-center">
+                        <!-- Recorremos nuestro array -->
+                        <td v-text="curso[1]"></td>
+                        <td v-text="curso[2]"></td>
+                        <td v-text="curso[3]"></td>
+                        <td v-if="curso[3]>1" class="btn btn-success btn-sm" @click="matricular(curso[1],index)">Add
+                        </td>
                         <!--En la segunda mostramos el apellido-->
                     </tr>
                     </tbody>
@@ -70,6 +70,7 @@
             this.curso = "";
         }
     }
+
     export default {
         name: "Matricula",
         data() {
@@ -122,18 +123,20 @@
                     }
                 }).then(res => (res.json().then(data => this.alv = data)))
             },
-            matricular(curso) {
+            matricular(curso, index) {
+
+
                 this.matricula.estudiante = this.nombre;
                 this.matricula.curso = curso;
+                this.alv.splice(index, 1);
                 fetch('/api/inscribir', {
                     method: 'POST',
                     body: JSON.stringify(this.matricula),
                     headers: {
                         'Accept': 'application/json',
                         'Content-type': 'application/json'
-
                     }
-                }).then(res => res.json()).then(data => this.getDataByEstudent());
+                }).then(res => res.json()).then(data => console.log(data));
 
             }
         }
