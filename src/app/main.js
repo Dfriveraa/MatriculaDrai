@@ -1,7 +1,9 @@
+//Indicamos lo necesario para que corra VueJS
 import Vue from 'vue';
 import App from './App.vue'
+//Cargamos el controlador para indicar donde estan las rutas de las vistas
 import router from './router/router.js'
-// Vue.use(Router);
+//Cargamos vue
 new Vue({
     el:'#app',
     router,

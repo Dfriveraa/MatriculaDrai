@@ -1,3 +1,4 @@
+//Importaciones
 const express = require('express');
 const Excel=require('exceljs');
 workbook = new Excel.Workbook();
@@ -5,33 +6,22 @@ const router = express.Router();
 bodyParser=require('body-parser');
 const path=require('path');
 const pathEcxel=path.dirname(__dirname);
-router.get('/list', (req, res) => {
-    workbook.xlsx.readFile(pathEcxel+'/model/Matricula.xlsx').then(function () {
 
-            var materias = workbook.getWorksheet(1);
-            var tabla=materias.getSheetValues();
-            //res.send((curso.slice(1)));
-            console.log(tabla);
-            res.json(tabla.slice(1))
-        }
-    )
-});
-router.get('/listView', (req, res) => {
+//Petición get que revisa el excel y retorna los valores de su primera hoja, Código nombre y cupo de los cursos
+router.get('/listaCursos', (req, res) => {
     workbook.xlsx.readFile(pathEcxel+'/model/Matricula.xlsx').then(function () {
-
-            var materias = workbook.getWorksheet(2);
-            var tabla=materias.getSheetValues();
-            console.log(tabla);
+            var tabla=workbook.getWorksheet(1).getSheetValues();
             res.json(tabla.slice(1))
         }
     )
 });
 
-router.post('/waa',(req,res)=>{
-
-    console.log(req.body);
-    res.send('negativo')
-
+//Petición get que revisa el excel y retorna los valores la segunda hoja,registro de las operaciones, quién, que curso y la fecha
+router.get('/listaHistorial', (req, res) => {
+    workbook.xlsx.readFile(pathEcxel+'/model/Matricula.xlsx').then(function () {
+            var tabla=workbook.getWorksheet(2).getSheetValues();
+            res.json(tabla.slice(1))
+        }
+    )
 });
-
 module.exports = router;
